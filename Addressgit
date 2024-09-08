@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Address Autocomplete</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script>
+      function initAutocomplete() {
+        const autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById('autocomplete'), 
+          { types: ['geocode'] }
+        );
+        
+        autocomplete.addListener('place_changed', function() {
+          const place = autocomplete.getPlace();
+          if (place.geometry) {
+            console.log('Selected place:', place);
+          } else {
+            console.log('No details available for input:', place.name);
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', initAutocomplete);
+    </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      #autocomplete {
+        width: 100%;
+        padding: 10px;
+        margin: 20px 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Enter your address</h2>
+    <input id="autocomplete" placeholder="Start typing your address" type="text"/>
+  </body>
+</html>
